@@ -1,7 +1,29 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    // "files": [],
+    // "references": [
+    //   { "path": "./tsconfig.app.json" },
+    //   { "path": "./tsconfig.node.json" }
+    // ],
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",
+        "lib": ["ES6", "DOM", "DOM.Iterable"],
+        "jsx": "react-jsx",
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "@app/*": ["src/app/*"],
+            "@features/*": ["src/features/*"],
+            "@entities/*": ["src/entities/*"],
+            "@shared/*": ["src/shared/*"],
+            "@pages/*": ["src/pages/*"],
+            "@widgets/*": ["src/widgets/*"]
+        }
+    },
+    "include": ["src/**/*", "main.tsx", "App.tsx"],
+    "exclude": ["node_modules", "dist"]
 }

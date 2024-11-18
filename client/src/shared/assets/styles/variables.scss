@@ -1,7 +1,6 @@
 // ----- font-family
-$f-Inter-Medium: Inter-Medium, sans-serif;
-$f-Inter-SemiBold: Inter-SemiBold, sans-serif;
-$f-WorkSans: WorkSans, sans-serif;
+$f-inter: Inter, sans-serif;
+$f-worksans: WorkSans, sans-serif;
 
 
 // ----- breakpoint
@@ -18,3 +17,5 @@ $c-gray-dark-opacity: rgba(235, 235, 255, 0.05);
 $c-black: rgb(23, 23, 25);
 $c-black-light: rgb(33, 33, 36);
 $c-blue-light: rgb(0, 255, 255);
+$c-violet: rgb(124, 68, 252);
+$c-violet-opacity: rgba(124, 68, 252, 0.2);

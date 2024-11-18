@@ -1,0 +1,19 @@
+@use '../../assets/styles/variables.scss';
+
+.button {
+
+  border: none;
+  border-radius: .8rem;
+  background-color: variables.$c-violet;
+
+  text-align: center;
+  font-size: 1.4rem;
+  color: variables.$c-white;
+
+  cursor: pointer;
+
+  &:disabled {
+    background-color: variables.$c-violet-opacity;
+    cursor: default;
+  }
+}

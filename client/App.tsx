@@ -1,9 +1,9 @@
-import "./App.css";
+import { LoginPage } from "@pages/index";
 
 function App() {
     return (
         <>
-            <h1>Привет мир!</h1>
+            <LoginPage />
         </>
     );
 }

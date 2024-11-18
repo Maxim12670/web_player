@@ -1,0 +1,38 @@
+@use '../../assets/styles/variables.scss';
+
+.my-input {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  &__title {
+    margin-bottom: .2rem;
+    color: variables.$c-white;
+    font-size: 1.6rem;
+  }
+
+  &__input {
+    border: .1rem solid variables.$c-gray-dark-opacity;
+    border-radius: .8rem;
+    padding: 1.2rem 2rem 1.2rem 2rem;
+    color: variables.$c-white;
+    font-size: 1.4rem;
+    letter-spacing: 0;
+    background-color: variables.$c-gray-dark;
+
+    cursor: pointer;
+
+    &::placeholder {
+      font-size: 1.4rem;
+      color: variables.$c-white;
+    }
+
+    &:focus {
+      outline: none;
+      color: variables.$c-black;
+      background-color: variables.$c-white;
+    }
+
+  }
+}

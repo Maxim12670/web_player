@@ -1,22 +1,42 @@
-@import './variables.scss';
+@use 'variables';
 
 * {
   margin: 0;
   padding: 0;
-  font-family: $f-Inter-SemiBold;
+  font-family: variables.$f-inter;
+  font-weight: 500;
+  box-sizing: border-box;
 }
 
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
 html {
-  // 1rem === 10px
   box-sizing: border-box;
   font-size: calc(100vw / 1920 * 10);
+  height: 100%;
+}
 
-  @media (max-width: 1024px) {
+body {
+  background-color: variables.$c-black;
+}
+
+@media (max-width: 1024px) {
+  html {
     font-size: calc(100vw / 768 * 10);
   }
+}
 
-  @media (max-width: 767px) {
-    font-size: calc(100vw / 320 * 10);
+@media (max-width: 767px) {
+  html {
+    font-size: calc(100vw / 500 * 10);
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: calc(100vw / 375 * 10);
   }
 }
