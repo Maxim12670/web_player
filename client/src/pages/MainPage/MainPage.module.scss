@@ -1,0 +1,22 @@
+.main-page {
+  &__wrapper {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas: "menu content";
+    background-color: #fff;
+  }
+
+  &__menu {
+    display: inherit;
+    grid-area: menu;
+    background-color: red;
+  }
+
+  &__content {
+    display: inherit;
+    grid-area: content;
+    background-color: violet;
+  }
+}
