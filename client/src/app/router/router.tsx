@@ -1,9 +1,11 @@
 import { createBrowserRouter, replace } from "react-router-dom";
-import { MainPage, LoginPage } from "@pages/index";
+import { MainPage, LoginPage, HomePage, SettingPage } from "@pages/index";
 
 export class RoutePaths {
-    static main = "/";
     static auth = "/auth";
+    static main = "/";
+    static homePage = "home";
+    static settingPage = "setting";
 }
 
 const loginPage = {
@@ -11,9 +13,20 @@ const loginPage = {
     element: <LoginPage />,
 };
 
+const homePage = {
+  path: RoutePaths.homePage,
+  element: <HomePage />,
+};
+
+const settingPage = {
+  path: RoutePaths.settingPage,
+  element: <SettingPage />,
+};
+
 const mainPage = {
     path: RoutePaths.main,
     element: <MainPage />,
+    children: [homePage, settingPage],
     loader: () => {
         if (!localStorage.getItem("userId")) {
             console.log("я на авторизацию");

@@ -1,6 +1,8 @@
 import styles from "./MainPage.module.scss";
 import { ContentContainer } from "@shared/ui";
 import { NavMenu } from "@widgets/ui";
+import { Outlet } from "react-router-dom";
+// import { HomePage, SettingPage } from "@pages/index";
 
 const MainPage = () => {
     return (
@@ -11,7 +13,7 @@ const MainPage = () => {
                 </div>
 
                 <div className={styles["main-page__content"]}>
-                    content content content content content content content content content
+                    <Outlet />
                 </div>
             </div>
         </ContentContainer>
