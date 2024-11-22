@@ -1,3 +1,5 @@
+@use '@shared/assets/styles/variables.scss';
+
 .main-page {
   &__wrapper {
     display: grid;
@@ -9,9 +11,8 @@
   }
 
   &__menu {
-    display: inherit;
+    display: flex;
     grid-area: menu;
-    background-color: red;
   }
 
   &__content {
