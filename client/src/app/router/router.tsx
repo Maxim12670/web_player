@@ -14,19 +14,19 @@ const loginPage = {
 };
 
 const homePage = {
-  path: RoutePaths.homePage,
-  element: <HomePage />,
+    path: RoutePaths.homePage,
+    element: <HomePage />,
 };
 
 const settingPage = {
-  path: RoutePaths.settingPage,
-  element: <SettingPage />,
+    path: RoutePaths.settingPage,
+    element: <SettingPage />,
 };
 
 const mainPage = {
     path: RoutePaths.main,
     element: <MainPage />,
-    children: [homePage, settingPage],
+    children: [{ path: "", loader: () => replace(RoutePaths.homePage) }, homePage, settingPage],
     loader: () => {
         if (!localStorage.getItem("userId")) {
             console.log("я на авторизацию");
