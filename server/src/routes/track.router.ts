@@ -1,0 +1,8 @@
+import { Router } from "express";
+import { TrackController } from "../controllers/track.controller";
+
+const router = Router();
+
+router.post("/new-track", TrackController.addTrack);
+
+export default router;
