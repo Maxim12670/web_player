@@ -21,7 +21,9 @@ const NavMenu = () => {
                 <li className={styles.sidebar__item} onClick={() => handleClick(RoutePaths.homePage)}>
                     Home
                 </li>
-                <li className={styles.sidebar__item}>Add new track</li>
+                <li className={styles.sidebar__item} onClick={() => handleClick(RoutePaths.addNewTrack)}>
+                    Add new track
+                </li>
                 <li className={styles.sidebar__item}>Create new playlists</li>
                 <li className={styles.sidebar__item} onClick={() => handleClick(RoutePaths.settingPage)}>
                     Settings
