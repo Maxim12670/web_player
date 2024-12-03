@@ -8,6 +8,9 @@ CREATE TABLE person(
   avatar_path VARCHAR(255)
 );
 
+-- создание перечисления жанров
+CREATE TYPE genre_enum AS ENUM ('Rock', 'Hip-Hop', 'Chanson', 'Jazz', 'Drill', 'Pop', 'Rap');
+
 -- таблица, содержащая информацию о треке
 CREATE TABLE track(
   track_id SERIAL PRIMARY KEY,

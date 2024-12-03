@@ -61,7 +61,7 @@ const AddNewTrack = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response.data);
+    
     } catch (err) {
       console.log("Произошла ошибка: ", err);
     }
