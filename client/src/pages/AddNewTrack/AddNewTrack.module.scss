@@ -76,4 +76,10 @@
     margin: 0 auto;
     margin-top: 10rem;
   }
+
+  &_disable {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: default;
+  }
 }

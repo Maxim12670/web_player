@@ -1,6 +1,6 @@
 import styles from "./AddNewTrack.module.scss";
 import axiosInstance from "@shared/api/axiosInstace";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { MyInput, MyButton, MySelect, FileBtn } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
 
@@ -13,6 +13,7 @@ const AddNewTrack = () => {
   const [previewPath, setPreviewPath] = useState<string>("");
   const [avatar, setAvatar] = useState<File | null>(null);
   const [track, setTrack] = useState<File | null>(null);
+  const [isDisableBtn, setIsDisableBtn] = useState<boolean>(true);
 
   const handleChangeTrackName = (e: ChangeEvent<HTMLInputElement>) => {
     setTrackName(e.target.value);
@@ -45,15 +46,11 @@ const AddNewTrack = () => {
 
   const handleSubmit = async () => {
     const formData = new FormData();
-    formData.append("name", trackName);
-    formData.append("author", author);
+    formData.append("name", trackName!);
+    formData.append("author", author!);
     formData.append("genre", genre!);
     formData.append("track", track!);
     formData.append("avatar", avatar!);
-
-    // for (let key of formData.keys()) {
-    //   console.log(`${key}: ${formData.get(key)}`);
-    // }
 
     try {
       const response = await axiosInstance.post("/track/new-track", formData, {
@@ -61,11 +58,18 @@ const AddNewTrack = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-    
     } catch (err) {
       console.log("Произошла ошибка: ", err);
     }
   };
+
+  useEffect(() => {
+    if (trackName != "" && author != "" && genre != null && avatar != null && track != null) {
+      setIsDisableBtn(false);
+    } else {
+      setIsDisableBtn(true);
+    }
+  }, [trackName, author, genre, avatar, track]);
 
   return (
     <div className={styles.wrapper}>
@@ -102,7 +106,11 @@ const AddNewTrack = () => {
           onChange={handleChangeTrackFile}
         />
         {previewPath && <img src={previewPath} alt="Preview" className={styles.avatar} />}
-        <MyButton text="Post Data" style={`${styles.btn} ${styles["btn_post"]}`} onClick={handleSubmit} />
+        <MyButton
+          text="Post Data"
+          style={`${styles.btn} ${styles["btn_post"]} ${isDisableBtn ? styles["btn_disable"] : ""}`}
+          onClick={handleSubmit}
+        />
       </div>
     </div>
   );
