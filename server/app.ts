@@ -19,7 +19,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/track", trackRouter);
 
-const port = 3000;
+const port = 3001;
 
 app.listen(port, () => {
     console.log("start!!!", port);

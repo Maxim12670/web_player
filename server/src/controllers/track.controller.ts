@@ -28,7 +28,7 @@ export class TrackController {
         // метод который возвращает кол-во записей в таблице треки
 
         const countTracks = await TrackRepository.getCountTrack();
-        console.log(countTracks);
+        // console.log(countTracks);
         //
         const newTrackName = `${name}_${countTracks}_logo${path.extname(track.name)}`;
         const newAvatarName = `${name}_${countTracks}_avatar${path.extname(avatar!.name)}`;
@@ -36,8 +36,8 @@ export class TrackController {
         const trackUploadPath = path.join(trackUploadDir, newTrackName);
         const avatarUploadPath = path.join(avatarUploadDir, newAvatarName);
 
-        const dbTrackPath = path.join("cloud/track", newTrackName);
-        const dbAvatarPath = path.join("cloud/image", newAvatarName);
+        const dbTrackPath = path.join("cloud\track", newTrackName);
+        const dbAvatarPath = path.join("cloud\image", newAvatarName);
 
         await new Promise((resolve, reject) => {
           avatar!.mv(avatarUploadPath, (err: any) => {
@@ -68,12 +68,22 @@ export class TrackController {
         });
 
         res.status(200).json(result);
-        
       } else {
         res.status(400).json({ message: "Нет файлов для загрузки" });
       }
     } catch (error: any) {
       console.log("Error in TrackController addTrack: ", error);
+      res.status(400).json({ message: error.message });
+    }
+  }
+
+  static async getTrackById(req: Request, res: Response) {
+    try {
+      const { id } = req.body;
+      const track = await TrackService.getTrackById(id);
+      console.log(track)
+      if (track) res.status(200).json(track);
+    } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
   }

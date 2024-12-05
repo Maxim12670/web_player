@@ -18,4 +18,9 @@ export class TrackRepository {
 
     return result;
   }
+
+  static async getTrackById(id: number): Promise<ITrack | null> {
+    const track = await pool.query("SELECT * FROM track WHERE track_id = $1", [id]);
+    return track.rows[0] ?? null;
+  }
 }
