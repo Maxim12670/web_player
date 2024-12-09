@@ -18,7 +18,8 @@ CREATE TABLE track(
   author VARCHAR(255),
   genre VARCHAR(255),
   logo_path VARCHAR(255),
-  track_path VARCHAR(255) NOT NULL
+  track_path VARCHAR(255) NOT NULL,
+  duration VARCHAR(255) NOT NULL
 );
 
 -- таблица, содержащая информацию о плейлисте

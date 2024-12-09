@@ -12,8 +12,8 @@ export class TrackRepository {
 
   static async addNewTrack(track: ITrack) {
     const result = await pool.query(
-      "INSERT INTO track (name, author, genre, logo_path, track_path) VALUES ($1, $2, $3, $4, $5) RETURNING track_id",
-      [track.name, track.author, track.genre, track.logo_path, track.track_path]
+      "INSERT INTO track (name, author, genre, duration, logo_path, track_path) VALUES ($1, $2, $3, $4, $5, $6) RETURNING track_id",
+      [track.name, track.author, track.genre, track.duration, track.logo_path, track.track_path]
     );
 
     return result;

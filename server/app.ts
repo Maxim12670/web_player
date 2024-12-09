@@ -22,5 +22,4 @@ const port = 3001;
 
 app.listen(port, () => {
   console.log("start!!!", port);
-  console.log("Абсолютный путь к папке cloud:", path.join(__dirname, "./src/cloud"));
 });

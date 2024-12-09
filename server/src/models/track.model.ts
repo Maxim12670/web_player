@@ -13,6 +13,7 @@ export default interface ITrack {
   name: string;
   author: string | null;
   genre: string | null;
+  duration: string;
   logo_path: string | null;
   track_path: string;
 }

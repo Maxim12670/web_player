@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { TrackService } from "../services/track.service";
+import { TrackRepository } from "../repositories/track.repository";
 import { UploadedFile } from "express-fileupload";
 import path from "path";
 import fs from "fs";
-import { TrackRepository } from "../repositories/track.repository";
+import getAudioDuration from "get-audio-duration";
+import { ConvertTime } from "../utils/convertTime";
 
 export class TrackController {
   static async addTrack(req: Request, res: Response) {
@@ -25,28 +27,24 @@ export class TrackController {
           fs.mkdirSync(logoUploadDir, { recursive: true });
         }
 
-        // метод который возвращает кол-во записей в таблице треки
-
         const countTracks = await TrackRepository.getCountTrack();
-
         const newTrackName = `${name}_${countTracks}_logo${path.extname(track.name)}`;
-        const newLogoName = `${name}_${countTracks}_avatar${path.extname(logo!.name)}`;
+        const newLogoName = logo != null ? `${name}_${countTracks}_avatar${path.extname(logo.name)}` : null;
 
         const trackUploadPath = path.join(trackUploadDir, newTrackName);
-        const logoUploadPath = path.join(logoUploadDir, newLogoName);
 
-        const dbTrackPath = path.join("/cloud/track", newTrackName);
-        const dbLogoPath = path.join("/cloud/image", newLogoName);
-
-        await new Promise((resolve, reject) => {
-          logo!.mv(logoUploadPath, (err: any) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(null);
-            }
+        if (newLogoName != null) {
+          const logoUploadPath = path.join(logoUploadDir, newLogoName);
+          await new Promise((resolve, reject) => {
+            logo!.mv(logoUploadPath, (err: any) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(null);
+              }
+            });
           });
-        });
+        }
 
         await new Promise((resolve, reject) => {
           track.mv(trackUploadPath, (err: any) => {
@@ -58,12 +56,16 @@ export class TrackController {
           });
         });
 
+        const audioDuration = await getAudioDuration(trackUploadPath);
+        const duration = ConvertTime(audioDuration);
+
         const result = await TrackService.addNewTrack({
           name,
           author,
           genre,
-          logo_path: dbLogoPath,
-          track_path: dbTrackPath,
+          logo_path: newLogoName != null ? path.join("/cloud/image", newLogoName) : null,
+          track_path: path.join("/cloud/track", newTrackName),
+          duration: duration
         });
 
         res.status(200).json(result);
