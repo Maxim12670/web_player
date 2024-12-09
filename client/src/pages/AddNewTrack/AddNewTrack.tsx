@@ -3,17 +3,27 @@ import axiosInstance from "@shared/api/axiosInstace";
 import { ChangeEvent, useEffect, useState } from "react";
 import { MyInput, MyButton, MySelect, FileBtn } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
+import { ITrack } from "@entities/track/model/track";
 
 const trackGenre = ["Not genre", "Rock", "Hip-Hop", "Chanson", "Jazz", "Drill", "Pop", "Rap"];
 
 const AddNewTrack = () => {
-  const [trackName, setTrackName] = useState<string>("");
-  const [author, setAuthor] = useState<string>("");
+  const [trackName, setTrackName] = useState<string | null>("");
+  const [author, setAuthor] = useState<string | null>();
   const [genre, setGenre] = useState<string | null>(null);
   const [previewPath, setPreviewPath] = useState<string>("");
   const [avatar, setAvatar] = useState<File | null>(null);
   const [track, setTrack] = useState<File | null>(null);
   const [isDisableBtn, setIsDisableBtn] = useState<boolean>(true);
+
+  const clearFormData = () => {
+    setTrackName("");
+    setAuthor(null);
+    setGenre(null);
+    setPreviewPath("");
+    setAvatar(null);
+    setTrack(null);
+  };
 
   const handleChangeTrackName = (e: ChangeEvent<HTMLInputElement>) => {
     setTrackName(e.target.value);
@@ -58,6 +68,8 @@ const AddNewTrack = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      clearFormData();
+      console.log("hello");
     } catch (err) {
       console.log("Произошла ошибка: ", err);
     }

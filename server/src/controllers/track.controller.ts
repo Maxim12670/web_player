@@ -11,36 +11,35 @@ export class TrackController {
       if (req.files) {
         const { name, author, genre } = req.body;
         const track = req.files.track as UploadedFile;
-        const avatar = req.files.avatar as UploadedFile | null;
+        const logo = req.files.avatar as UploadedFile | null;
 
         const trackUploadDir = path.join(__dirname, "../cloud/track");
-        const avatarUploadDir = path.join(__dirname, "../cloud/image");
+        const logoUploadDir = path.join(__dirname, "../cloud/image");
 
         // Создание директорий, если они отсутствуют
         if (!fs.existsSync(trackUploadDir)) {
           fs.mkdirSync(trackUploadDir, { recursive: true });
         }
 
-        if (!fs.existsSync(avatarUploadDir)) {
-          fs.mkdirSync(avatarUploadDir, { recursive: true });
+        if (!fs.existsSync(logoUploadDir)) {
+          fs.mkdirSync(logoUploadDir, { recursive: true });
         }
 
         // метод который возвращает кол-во записей в таблице треки
 
         const countTracks = await TrackRepository.getCountTrack();
-        // console.log(countTracks);
-        //
+
         const newTrackName = `${name}_${countTracks}_logo${path.extname(track.name)}`;
-        const newAvatarName = `${name}_${countTracks}_avatar${path.extname(avatar!.name)}`;
+        const newLogoName = `${name}_${countTracks}_avatar${path.extname(logo!.name)}`;
 
         const trackUploadPath = path.join(trackUploadDir, newTrackName);
-        const avatarUploadPath = path.join(avatarUploadDir, newAvatarName);
+        const logoUploadPath = path.join(logoUploadDir, newLogoName);
 
-        const dbTrackPath = path.join("cloud\track", newTrackName);
-        const dbAvatarPath = path.join("cloud\image", newAvatarName);
+        const dbTrackPath = path.join("/cloud/track", newTrackName);
+        const dbLogoPath = path.join("/cloud/image", newLogoName);
 
         await new Promise((resolve, reject) => {
-          avatar!.mv(avatarUploadPath, (err: any) => {
+          logo!.mv(logoUploadPath, (err: any) => {
             if (err) {
               reject(err);
             } else {
@@ -63,7 +62,7 @@ export class TrackController {
           name,
           author,
           genre,
-          logo_path: dbAvatarPath,
+          logo_path: dbLogoPath,
           track_path: dbTrackPath,
         });
 
@@ -79,9 +78,9 @@ export class TrackController {
 
   static async getTrackById(req: Request, res: Response) {
     try {
-      const { id } = req.body;
-      const track = await TrackService.getTrackById(id);
-      console.log(track)
+      const { id } = req.query;
+      const track = await TrackService.getTrackById(Number(id));
+      console.log(track);
       if (track) res.status(200).json(track);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
