@@ -6,7 +6,6 @@ import axios from "axios";
 import AudioPlayer from "react-audio-player";
 
 const HomePage = () => {
-  const srcPhoto = "";
   const [name, setName] = useState<string | null>(null);
   const [author, setAuthor] = useState<string | null>(null);
   const [genre, setGenre] = useState<string | null>(null);
@@ -17,7 +16,7 @@ const HomePage = () => {
     try {
       const result = await axios.get<ITrack>("http://localhost:3001/api/track/get-track", {
         params: {
-          id: 2,
+          id: 1,
         },
       });
       const { name, author, genre, logo_path, track_path } = result.data;

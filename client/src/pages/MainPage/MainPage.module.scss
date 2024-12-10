@@ -4,12 +4,13 @@
   &__wrapper {
     display: grid;
     width: 100%;
-    height: 100vh;
+    height: 95vh;
+    margin-top: 2.5rem;
     grid-template-columns: 1fr 5fr;
-    grid-template-areas: "menu content";
-    background-color: #fff;
-
-    position: relative;
+    grid-template-rows: auto .5fr;
+    grid-template-areas:
+      "menu content"
+      "player player";
   }
 
   &__menu {
@@ -25,10 +26,7 @@
 }
 
 .player {
-  display: block;
-  position: absolute;
-  bottom: 0;
+  grid-area: player;
   background-color: red;
   width: 100%;
-  height: 9.4rem;
 }

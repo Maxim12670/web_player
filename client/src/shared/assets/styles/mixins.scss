@@ -1,0 +1,32 @@
+@use './variables.scss' as variables;
+
+@mixin reaction-icons {
+  fill: white;
+  cursor: pointer;
+
+  &:hover {
+    stroke: variables.$c-blue-light;
+  }
+
+  &:focus {
+    stroke: variables.$c-blue-light;
+  }
+
+  &:active {
+    fill: variables.$c-gray;
+    stroke: none;
+  }
+
+  &_disabled {
+    fill: rgb(76, 78, 84);
+    cursor: default;
+
+    &:hover {
+      fill: rgb(76, 78, 84);
+    }
+
+    &:active {
+      fill: rgb(76, 78, 84);
+    }
+  }
+}

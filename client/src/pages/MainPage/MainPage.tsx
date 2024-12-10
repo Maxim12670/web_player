@@ -1,6 +1,6 @@
 import styles from "./MainPage.module.scss";
 import { ContentContainer } from "@shared/ui";
-import { NavMenu } from "@widgets/ui";
+import { NavMenu, AudioPlayer } from "@widgets/ui";
 import { Outlet } from "react-router-dom";
 
 const MainPage = () => {
@@ -14,7 +14,9 @@ const MainPage = () => {
         <div className={styles["main-page__content"]}>
           <Outlet />
         </div>
-        <div className={styles.player}></div>
+        <div className={styles.player}>
+          <AudioPlayer/>
+        </div>
       </div>
     </ContentContainer>
   );
