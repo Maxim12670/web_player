@@ -45,9 +45,7 @@ export class PlaylistRepository {
   }
 
   static async getUserAllPlaylists(personId: number) {
-    const playlist = await pool.query("SELECT * FROM playlist WHERE person_id = $1", [
-      personId
-    ]);
+    const playlist = await pool.query("SELECT * FROM playlist WHERE person_id = $1", [personId]);
 
     return playlist.rows ?? null;
   }
