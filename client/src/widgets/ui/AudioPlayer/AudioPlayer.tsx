@@ -1,35 +1,50 @@
 import styles from "./AudioPlayer.module.scss";
 import { ArrowPrev, ArrowNext, Play, Pause, Volume, Ellipsis } from "@shared/assets/icons";
 import { ITrack } from "@entities/track/model/track";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { converToMinAndSec } from "@shared/helper";
-import { myAudio } from "./data";
+// import { myAudio } from "./data";
+
+const myAudio: ITrack = {
+  track_id: 1,
+  name: "one love",
+  author: "мияги",
+  genre: "Rap",
+  duration: "3:30",
+  logo_path: "http://localhost:3001\\cloud\\image\\one love_1_avatar.jpg",
+  track_path: "http://localhost:3001\\cloud\\track\\one love_1_logo.mp3",
+};
+
+const convertBackslashesToSlashes = (url: string): string => {
+  return url.replace(/\\/g, "/");
+};
 
 const AudioPlayer = () => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [repeating, setRepeating] = useState<boolean>(false);
   const [selectedTrack, setSelectedTrack] = useState<ITrack | null>(null);
+  const [volume, setVolume] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
   const timelineRef = useRef<HTMLSpanElement | null>(null);
 
-  const handleAudioPlay = () => {
-    if (audioRef.current) {
-      if (!playing) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-      setPlaying(!playing);
-    }
-  };
+  // const handleAudioPlay = () => {
+  //   if (audioRef.current) {
+  //     if (!playing) {
+  //       audioRef.current.play();
+  //     } else {
+  //       audioRef.current.pause();
+  //     }
+  //     setPlaying(!playing);
+  //   }
+  // };
 
   const handleTrackClick = (track: ITrack) => {
-    setSelectedTrack(track);
-    setPlaying(true);
-    if (selectedTrack && audioRef.current) {
-      console.log(1);
-      audioRef.current.src = selectedTrack.track_path;
+    if (!selectedTrack) {
+      setSelectedTrack(track);
+    }
+    if (track && audioRef.current) {
+      audioRef.current.src = convertBackslashesToSlashes(track.track_path);
       audioRef.current.play();
       setPlaying(true);
     }
@@ -39,6 +54,13 @@ const AudioPlayer = () => {
     if (playing && audioRef.current) {
       setPlaying(false);
       audioRef.current.pause();
+    }
+  };
+
+  const handleChangeVolume = (e: ChangeEvent<HTMLInputElement>) => {
+    setVolume(+e.target.value);
+    if (audioRef.current) {
+      audioRef.current.volume = +e.target.value;
     }
   };
 
@@ -87,7 +109,6 @@ const AudioPlayer = () => {
 
   // useEffect(() => {
   //   if (selectedTrack && audioRef.current) {
-  //     console.log(1)
   //     audioRef.current.src = selectedTrack.track_path;
   //     audioRef.current.play();
   //     setPlaying(true);
@@ -117,7 +138,6 @@ const AudioPlayer = () => {
           ) : (
             <Pause className={`${styles.btn}`} onClick={() => handlePauseClick()} />
           )}
-
           <ArrowNext className={`${styles.btn}`} />
         </div>
 
@@ -135,7 +155,12 @@ const AudioPlayer = () => {
       {audioRef != null ? <audio ref={audioRef} /> : ""}
 
       <div className={styles.options}>
-        <Volume className={`${styles.btn} ${styles.options__volume}`} />
+        <div>
+          <Volume className={`${styles.btn} ${styles["options__volume-icon"]}`} />
+          <div className={styles["options__volume"]}>
+            <input min="0" max="1" step="0.1" type="range" name="volume" onChange={(e) => handleChangeVolume(e)} />
+          </div>
+        </div>
         <Ellipsis className={`${styles.btn} ${styles.options__ellipsis}`} />
       </div>
     </div>

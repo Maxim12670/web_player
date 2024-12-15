@@ -124,10 +124,33 @@
   width: 20.8rem;
   height: 4rem;
 
+  position: relative;
+
   &__volume {
+    display: none;
+    position: absolute;
+    left: 1.5rem;
+    top: -.4rem;
+    padding: 15px;
+    border-radius: 6px;
+
+    input {
+      cursor: pointer;
+    }
+  }
+
+  &__volume-icon {
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 2rem;
+
+    // &:hover + .options__volume {
+    //   display: block;
+    // }
+
+    &:active+.options__volume {
+      display: block;
+    }
   }
 
   &__ellipsis {
