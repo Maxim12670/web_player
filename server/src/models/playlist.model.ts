@@ -1,5 +1,3 @@
-// модель плейлиста
-
 export default interface IPlaylist {
   playlist_id?: number;
   title: string;
