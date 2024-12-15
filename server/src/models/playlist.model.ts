@@ -3,6 +3,6 @@ export default interface IPlaylist {
   title: string;
   description: string | null;
   create_date?: string;
-  logo_path?: string;
+  logo_path?: string | null;
   person_id: number;
 }
