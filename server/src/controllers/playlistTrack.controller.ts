@@ -10,7 +10,7 @@ export class PlaylistTrackController {
 
       if (result) res.status(200).json(result);
     } catch (error: any) {
-      console.log("Error in ", error.message);
+      console.log("Error in addTrackPlaylist", error.message);
       res.status(400).json({ message: error.message });
     }
   }
@@ -22,7 +22,7 @@ export class PlaylistTrackController {
 
       if (result) res.status(200).json({ message: "Трек успешко удален!" });
     } catch (error: any) {
-      console.log("Error in ", error.message);
+      console.log("Error in deleteTrackPlaylist", error.message);
       res.status(400).json({ message: error.message });
     }
   }
@@ -34,7 +34,7 @@ export class PlaylistTrackController {
 
       if (result) res.status(200).json(result);
     } catch (error: any) {
-      console.log("Error in ", error.message);
+      console.log("Error in getAllTrackPlaylist", error.message);
       res.status(400).json({ message: error.message });
     }
   }

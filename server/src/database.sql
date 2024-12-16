@@ -44,7 +44,7 @@ CREATE TABLE playlist_track(
 );
 
 -- таблица, содержащая треки, которые были добавлены в избранное
-CREATE TABLE user_favorite_track(
+CREATE TABLE person_favorite_track(
   favorite_track_id SERIAL PRIMARY KEY,
   added_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   person_id INT NOT NULL,
