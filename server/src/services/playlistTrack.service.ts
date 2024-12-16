@@ -23,6 +23,10 @@ export class PlaylistTrackService {
     if (!playlist) throw new Error("Плейлист не найден!");
     if (!track) throw new Error("Трек не найден!");
 
+    const trackExist = await PlaylistTrackRepository.findTrack(playlistId, trackId);
+
+    if (!trackExist) throw new Error("Что то пошло не так...");
+
     const result = await PlaylistTrackRepository.deleteTrackPlaylist(playlistId, trackId);
 
     return result;
