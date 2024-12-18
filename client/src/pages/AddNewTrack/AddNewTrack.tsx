@@ -1,10 +1,9 @@
 import styles from "./AddNewTrack.module.scss";
-import axiosInstance from "@shared/api/axiosInstace";
+import { postNewTrack } from "@entities/track/api/trackApi";
+import { trackGenres } from "@entities/track/model/track";
 import { ChangeEvent, useEffect, useState } from "react";
 import { MyInput, MyButton, MySelect, FileBtn } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
-
-const trackGenre = ["Not genre", "Rock", "Hip-Hop", "Chanson", "Jazz", "Drill", "Pop", "Rap"];
 
 const AddNewTrack = () => {
   const [trackName, setTrackName] = useState<string | null>("");
@@ -62,11 +61,7 @@ const AddNewTrack = () => {
     formData.append("avatar", avatar ?? "");
 
     try {
-      const response = await axiosInstance.post("/track/new-track", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await postNewTrack(formData);
       clearFormData();
     } catch (err) {
       console.log("Произошла ошибка: ", err);
@@ -98,7 +93,7 @@ const AddNewTrack = () => {
           onChange={handleChangeTrackAuthor}
         />
         <MySelect
-          selectValues={trackGenre}
+          selectValues={trackGenres}
           currentValue={genre}
           style={styles.select}
           onClick={handleToggleTrackGenre}

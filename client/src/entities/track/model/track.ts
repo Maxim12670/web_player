@@ -1,12 +1,14 @@
-export enum Genres {
-  "Rock",
-  "Hip-Hop",
-  "Chanson",
-  "Jazz",
-  "Drill",
-  "Pop",
-  "Rap",
-}
+// export enum Genres {
+//   "Rock",
+//   "Hip-Hop",
+//   "Chanson",
+//   "Jazz",
+//   "Drill",
+//   "Pop",
+//   "Rap",
+// }
+
+export const trackGenres = ["Not genre", "Rock", "Hip-Hop", "Chanson", "Jazz", "Drill", "Pop", "Rap"];
 
 export interface ITrack {
   track_id?: number;
