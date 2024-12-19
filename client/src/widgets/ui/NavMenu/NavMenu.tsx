@@ -34,7 +34,8 @@ const NavMenu = () => {
 
       <ul className={styles.sidebar}>
         <p className={styles.sidebar__title}>My collection</p>
-        <li className={`${styles.sidebar__item} ${styles.sidebar__item_small}`}>Tracks</li>
+        <li className={`${styles.sidebar__item} ${styles.sidebar__item_small}`}>All Tracks</li>
+        <li className={`${styles.sidebar__item} ${styles.sidebar__item_small}`}>My Tracks</li>
         <li className={`${styles.sidebar__item} ${styles.sidebar__item_small}`}>Playlists</li>
       </ul>
 

@@ -1,4 +1,4 @@
-import styles from "./CreateNewPlaylist.module.scss";
+import styles from "./CreateNewPlaylistPage.module.scss";
 import { MyButton, MyInput, FileBtn } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
 import { useState, ChangeEvent, useEffect } from "react";

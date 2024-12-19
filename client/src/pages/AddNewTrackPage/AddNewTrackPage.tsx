@@ -1,4 +1,4 @@
-import styles from "./AddNewTrack.module.scss";
+import styles from "./AddNewTrackPage.module.scss";
 import { postNewTrack } from "@entities/track/api/trackApi";
 import { trackGenres } from "@entities/track/model/track";
 import { ChangeEvent, useEffect, useState } from "react";

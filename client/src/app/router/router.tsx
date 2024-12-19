@@ -1,5 +1,5 @@
 import { createBrowserRouter, redirect, replace } from "react-router-dom";
-import { MainPage, LoginPage, HomePage, SettingPage, AddNewTrack, CreateNewPlaylist } from "@pages/index";
+import { MainPage, LoginPage, HomePage, SettingPage, AddNewTrackPage, CreateNewPlaylistPage } from "@pages/index";
 import { useAppSelector } from "@app/store/hooks";
 
 
@@ -24,12 +24,12 @@ const homePage = {
 
 const addNewTrack = {
   path: RoutePaths.addNewTrack,
-  element: <AddNewTrack />,
+  element: <AddNewTrackPage />,
 };
 
 const createNewPlaylist = {
   path: RoutePaths.createNewPlaylist,
-  element: <CreateNewPlaylist />,
+  element: <CreateNewPlaylistPage />,
 };
 
 const settingPage = {
