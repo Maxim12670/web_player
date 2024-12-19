@@ -23,4 +23,9 @@ export class TrackRepository {
     const track = await pool.query("SELECT * FROM track WHERE track_id = $1", [id]);
     return track.rows[0] ?? null;
   }
+
+  static async getTrackByName(name: string): Promise<ITrack[] | null> {
+    const tracks = await pool.query("SELECT * FROM track WHERE name ILIKE $1", [`%${name}%`]);
+    return tracks.rows.length > 0 ? tracks.rows : null;
+  }
 }

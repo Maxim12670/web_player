@@ -15,4 +15,12 @@ export class TrackService {
 
     return track;
   }
+
+  static async getTrackByName(name: string) {
+    const tracks = await TrackRepository.getTrackByName(name);
+
+    if (!tracks) throw new Error("Ничего не нашли!");
+
+    return tracks;
+  }
 }

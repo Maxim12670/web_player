@@ -65,7 +65,7 @@ export class TrackController {
           genre,
           logo_path: newLogoName != null ? path.join("/cloud/image", newLogoName) : null,
           track_path: path.join("/cloud/track", newTrackName),
-          duration: duration
+          duration: duration,
         });
 
         res.status(200).json(result);
@@ -84,6 +84,17 @@ export class TrackController {
       const track = await TrackService.getTrackById(Number(id));
       console.log(track);
       if (track) res.status(200).json(track);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
+  static async getTrackByName(req: Request, res: Response) {
+    try {
+      const { name } = req.query;
+      const tracks = await TrackService.getTrackByName(String(name))
+      console.log('tracks', tracks);
+      if(tracks) res.status(200).json(tracks)
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
