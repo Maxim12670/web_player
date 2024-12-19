@@ -45,7 +45,11 @@ export class PlaylistController {
       } else {
         const result = await PlaylistService.createPlaylist({ title, description, person_id, logo_path: null });
 
-        if (result) res.status(200).json(result);
+        if (result)
+          res.status(200).json({
+            data: result,
+            message: "Плейлист успешно создан!",
+          });
       }
     } catch (error: any) {
       console.log("Error in createPlaylist", error.message);

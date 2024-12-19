@@ -23,7 +23,7 @@ export class PlaylistRepository {
       [title, description, logo_path, person_id]
     );
 
-    return result.rows[0];
+    return result.rows[0].playlist_id;
   }
 
   static async deleteSelectPlaylist(personId: number, playlistId: number) {
