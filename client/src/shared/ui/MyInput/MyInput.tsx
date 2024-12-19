@@ -6,12 +6,13 @@ interface IMyInput {
   type: MyInputType;
   title?: string;
   placeholder?: string;
+  value?: any; 
   style?: string;
   required?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const MyInput = ({ type, title, placeholder, style, required, onChange }: IMyInput) => {
+const MyInput = ({ type, title, placeholder, style, required, value, onChange }: IMyInput) => {
   return (
     <div className={`${styles["my-input"]} ${style}`}>
       <span className={styles["my-input__title"]}>{title}</span>
@@ -20,6 +21,7 @@ const MyInput = ({ type, title, placeholder, style, required, onChange }: IMyInp
         type={type}
         required={required}
         placeholder={placeholder}
+        value={value}
         onChange={onChange}
       />
     </div>

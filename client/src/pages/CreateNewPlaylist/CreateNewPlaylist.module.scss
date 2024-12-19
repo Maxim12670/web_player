@@ -1,0 +1,69 @@
+@use "@shared/assets/styles/variables";
+
+.create-playlist {
+  width: 100%;
+  overflow: hidden;
+  padding: 2.5rem 2rem;
+
+
+  &__title {
+    text-align: center;
+    font-size: 1.6rem;
+    color: variables.$c-white;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5rem;
+  }
+
+  &__wrapper {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-rows: repeat(4, 5rem);
+    grid-template-areas:
+      "title btnAvatar"
+      "descr avatar"
+      "btnSelect avatar"
+      "btnPost btnPost";
+  }
+}
+
+.input {
+  width: 40rem;
+
+  input {
+    height: 5rem;
+  }
+
+  &__title {
+    grid-area: title;
+  }
+
+  &__descr {
+    grid-area: descr;
+  }
+}
+
+.btn {
+  width: 20rem;
+  height: 5rem;
+
+  &__avatar {
+    grid-area: btnAvatar;
+  }
+
+  &__select {
+    grid-area: btnSelect;
+  }
+
+  &__post {
+    grid-area: btnPost;
+  }
+}
+
+.avatar {
+  display: block;
+  width: 20rem;
+  height: 20rem;
+  grid-area: avatar;
+  object-fit: fill;
+}
