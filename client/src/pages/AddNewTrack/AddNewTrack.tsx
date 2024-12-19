@@ -6,10 +6,10 @@ import { MyInput, MyButton, MySelect, FileBtn } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
 
 const AddNewTrack = () => {
-  const [trackName, setTrackName] = useState<string | null>("");
-  const [author, setAuthor] = useState<string | null>();
+  const [trackName, setTrackName] = useState<string | null>(null);
+  const [author, setAuthor] = useState<string | null>(null);
   const [genre, setGenre] = useState<string | null>(null);
-  const [previewPath, setPreviewPath] = useState<string | null>();
+  const [previewPath, setPreviewPath] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<File | null>(null);
   const [track, setTrack] = useState<File | null>(null);
   const [isDisableBtn, setIsDisableBtn] = useState<boolean>(true);
@@ -84,12 +84,14 @@ const AddNewTrack = () => {
           type={MyInputType.Text}
           placeholder="Track name"
           style={`${styles.input} ${styles.input_name}`}
+          value={trackName ?? ""}
           onChange={handleChangeTrackName}
         />
         <MyInput
           type={MyInputType.Text}
           placeholder="Author"
           style={`${styles.input} ${styles.input_author}`}
+          value={author ?? ""}
           onChange={handleChangeTrackAuthor}
         />
         <MySelect
