@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect, replace } from "react-router-dom";
 import { MainPage, LoginPage, HomePage, SettingPage, AddNewTrack, CreateNewPlaylist } from "@pages/index";
 import { useAppSelector } from "@app/store/hooks";
 
+
 export class RoutePaths {
   static auth = "/auth";
   static main = "/";
@@ -39,7 +40,7 @@ const settingPage = {
 const MainPageWrapper = () => {
   const user = useAppSelector((state) => state.user);
 
-  if (!user.person_id) {
+  if (!user.person_id && !localStorage.getItem("id")) {
     return <LoginPage />;
   }
 

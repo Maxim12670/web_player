@@ -19,6 +19,7 @@ export const useLogin = () => {
     try {
       const data: IUser = await loginUser({ email, password });
       if (data) {
+        localStorage.setItem('id', String(data.person_id))
         dispatch(setInfo(data));
         navigate(RoutePaths.main);
       }

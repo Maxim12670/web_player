@@ -12,8 +12,13 @@ export interface IRegistrUsert {
   password: string;
 }
 
+class ApiPath {
+  static login = "auth/login";
+  static register = "auth/register";
+}
+
 export const loginUser = async ({ email, password }: ILoginUser) => {
-  const response = await axiosInstance.post("auth/login", {
+  const response = await axiosInstance.post(ApiPath.login, {
     email: email,
     password: password,
   });
@@ -22,7 +27,7 @@ export const loginUser = async ({ email, password }: ILoginUser) => {
 };
 
 export const registrUser = async ({ email, login, password }: IRegistrUsert) => {
-  const response = await axiosInstance.post("auth/register", {
+  const response = await axiosInstance.post(ApiPath.register, {
     email: email,
     login: login,
     password: password,

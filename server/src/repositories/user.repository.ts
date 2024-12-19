@@ -12,7 +12,7 @@ export class UserRepository {
         return result.rows.length ? result.rows[0] : null;
     }
 
-    static async getInfo(id: number): Promise<IUser | null> {
+    static async getInfo(id: number) {
         const result = await pool.query("SELECT * FROM person WHERE person_id = $1", [id]);
 
         return result.rows.length ? result.rows[0] : null;

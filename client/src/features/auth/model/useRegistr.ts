@@ -19,6 +19,7 @@ export const useRegistr = () => {
     try {
       const data: IUser = await registrUser({ email, login, password });
       if (data) {
+        localStorage.setItem('id', String(data.person_id))
         dispatch(setInfo(data))
         navigate(RoutePaths.main);
       }

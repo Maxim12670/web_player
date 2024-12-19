@@ -2,9 +2,9 @@ import { IUser } from "@entities/user/model/user";
 import axiosInstance from "@shared/api/axiosInstace";
 
 export const getUserInfo = async (id: number) => {
-    const response = await axiosInstance.get<IUser>("user/info", {
-        params: { id: id },
-    });
+  const response = await axiosInstance.get<IUser>("user/info", {
+    params: { id },
+  });
 
-    return response.data;
+  return response.data;
 };
