@@ -2,29 +2,32 @@ import { useState } from "react";
 import { ILoginUser, loginUser } from "@entities/user/api/authUserApi";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "@app/router/router";
+import { useAppDispatch } from "@app/store/hooks";
+import { setInfo } from "@app/store/storeSlices/userSlice";
+import { IUser } from "@entities/user/model/user";
 
 export const useLogin = () => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-    const handleLogin = async ({ email, password }: ILoginUser) => {
-        setLoading(true);
-        setError(null);
+  const handleLogin = async ({ email, password }: ILoginUser) => {
+    setLoading(true);
+    setError(null);
 
-        try {
-            const data = await loginUser({ email, password });
-            console.log("handle login data: ", data);
-            if (data) {
-                localStorage.setItem("userId", String(data));
-                navigate(RoutePaths.main);
-            }
-        } catch (err) {
-            if (err instanceof Error) setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+      const data: IUser = await loginUser({ email, password });
+      if (data) {
+        dispatch(setInfo(data));
+        navigate(RoutePaths.main);
+      }
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return { handleLogin, loading, error };
+  return { handleLogin, loading, error };
 };

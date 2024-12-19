@@ -1,5 +1,6 @@
-import { createBrowserRouter, replace } from "react-router-dom";
+import { createBrowserRouter, redirect, replace } from "react-router-dom";
 import { MainPage, LoginPage, HomePage, SettingPage, AddNewTrack, CreateNewPlaylist } from "@pages/index";
+import { useAppSelector } from "@app/store/hooks";
 
 export class RoutePaths {
   static auth = "/auth";
@@ -35,25 +36,26 @@ const settingPage = {
   element: <SettingPage />,
 };
 
+const MainPageWrapper = () => {
+  const user = useAppSelector((state) => state.user);
+
+  if (!user.person_id) {
+    return <LoginPage />;
+  }
+
+  return <MainPage />;
+};
+
 const mainPage = {
   path: RoutePaths.main,
-  element: <MainPage />,
+  element: <MainPageWrapper />,
   children: [
-    { path: "", loader: () => replace(RoutePaths.homePage) },
+    { path: "", loader: () => redirect(RoutePaths.homePage) },
     homePage,
     addNewTrack,
     settingPage,
     createNewPlaylist,
   ],
-  loader: () => {
-    if (!localStorage.getItem("userId")) {
-      console.log("я на авторизацию");
-      return replace(RoutePaths.auth);
-      // получение информации о пользователе по id
-    }
-    console.log("я на главной");
-    return null;
-  },
 };
 
 const router = createBrowserRouter([mainPage, loginPage]);

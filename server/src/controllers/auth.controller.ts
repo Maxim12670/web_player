@@ -6,7 +6,7 @@ export class AuthController {
         try {
             const { email, login, password } = req.body;
             const response = await AuthService.registration(email, login, password);
-            if (response) res.status(200).json(response.person_id);
+            if (response) res.status(200).json(response);
         } catch (error: any) {
             res.status(400).json({ message: error.message });
         }
@@ -16,7 +16,7 @@ export class AuthController {
         try {
             const { email, password } = req.body;
             const response = await AuthService.login(email, password);
-            res.status(200).json(response.person_id);
+            res.status(200).json(response);
         } catch (error: any) {
             res.status(400).json({ message: error.message });
         }
