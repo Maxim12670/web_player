@@ -24,8 +24,8 @@ export class TrackRepository {
     return track.rows[0] ?? null;
   }
 
-  static async getTrackByName(name: string): Promise<ITrack[] | null> {
-    const tracks = await pool.query("SELECT * FROM track WHERE name ILIKE $1", [`%${name}%`]);
+  static async getTrackByString(stringSearch: string): Promise<ITrack[] | null> {
+    const tracks = await pool.query("SELECT * FROM track WHERE name ILIKE $1 OR author ILIKE $1", [`%${stringSearch}%`]);
     return tracks.rows.length > 0 ? tracks.rows : null;
   }
 }

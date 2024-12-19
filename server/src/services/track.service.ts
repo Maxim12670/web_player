@@ -16,8 +16,8 @@ export class TrackService {
     return track;
   }
 
-  static async getTrackByName(name: string) {
-    const tracks = await TrackRepository.getTrackByName(name);
+  static async getTrackByString(stringSearch: string) {
+    const tracks = await TrackRepository.getTrackByString(stringSearch);
 
     if (!tracks) throw new Error("Ничего не нашли!");
 
