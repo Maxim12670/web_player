@@ -1,0 +1,11 @@
+@use "@shared/assets/styles/mixins" as mixins;
+
+.btn {
+  g {
+    fill: white;
+  }
+  fill: black;
+  @include mixins.reaction-icons;
+  width: 2.5rem;
+  cursor: pointer;
+}

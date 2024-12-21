@@ -1,9 +1,9 @@
 import styles from "./AudioPlayer.module.scss";
-import { ArrowPrev, ArrowNext, Play, Pause, Volume, Ellipsis } from "@shared/assets/icons";
+import { PlayBtn } from "@shared/ui";
+import { ArrowPrev, ArrowNext, Volume, Ellipsis } from "@shared/assets/icons";
 import { ITrack } from "@entities/track/model/track";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { converToMinAndSec } from "@shared/helper";
-// import { myAudio } from "./data";
+import { converToMinAndSec, convertBackslashesToSlashes } from "@shared/helper";
 
 const myAudio: ITrack = {
   track_id: 1,
@@ -15,10 +15,6 @@ const myAudio: ITrack = {
   track_path: "http://localhost:3001\\cloud\\track\\one love_1_logo.mp3",
 };
 
-const convertBackslashesToSlashes = (url: string): string => {
-  return url.replace(/\\/g, "/");
-};
-
 const AudioPlayer = () => {
   const [playing, setPlaying] = useState<boolean>(false);
   const [repeating, setRepeating] = useState<boolean>(false);
@@ -28,34 +24,41 @@ const AudioPlayer = () => {
   const progressRef = useRef<HTMLDivElement | null>(null);
   const timelineRef = useRef<HTMLSpanElement | null>(null);
 
-  // const handleAudioPlay = () => {
-  //   if (audioRef.current) {
-  //     if (!playing) {
-  //       audioRef.current.play();
-  //     } else {
-  //       audioRef.current.pause();
+  // const handleTrackClick = (track: ITrack) => {
+  //   if (playing && audioRef.current) {
+  //     setPlaying(false);
+  //     audioRef.current.pause();
+  //   } else {
+  //     if (!selectedTrack) {
+  //       setSelectedTrack(track);
   //     }
-  //     setPlaying(!playing);
+
+  //     if (track && audioRef.current) {
+  //       audioRef.current.src = convertBackslashesToSlashes(track.track_path);
+  //       audioRef.current.play();
+  //       setPlaying(true);
+  //     }
   //   }
   // };
 
-  const handleTrackClick = (track: ITrack) => {
-    if (!selectedTrack) {
-      setSelectedTrack(track);
-    }
-    if (track && audioRef.current) {
-      audioRef.current.src = convertBackslashesToSlashes(track.track_path);
-      audioRef.current.play();
-      setPlaying(true);
-    }
-  };
-
-  const handlePauseClick = () => {
+  // ------------------------------------
+  const handleTrackClick = () => {
     if (playing && audioRef.current) {
       setPlaying(false);
       audioRef.current.pause();
+    } else {
+      if (!selectedTrack) {
+        setSelectedTrack(myAudio);
+      }
+
+      if (myAudio && audioRef.current) {
+        audioRef.current.src = convertBackslashesToSlashes(myAudio.track_path);
+        audioRef.current.play();
+        setPlaying(true);
+      }
     }
   };
+  // ----------------------------------
 
   const handleChangeVolume = (e: ChangeEvent<HTMLInputElement>) => {
     setVolume(+e.target.value);
@@ -107,14 +110,6 @@ const AudioPlayer = () => {
     }
   }, [repeating, selectedTrack]);
 
-  // useEffect(() => {
-  //   if (selectedTrack && audioRef.current) {
-  //     audioRef.current.src = selectedTrack.track_path;
-  //     audioRef.current.play();
-  //     setPlaying(true);
-  //   }
-  // }, [selectedTrack]);
-
   return (
     <div className={styles.player}>
       <div className={styles.track}>
@@ -133,11 +128,7 @@ const AudioPlayer = () => {
       <div className={styles.control}>
         <div className={styles.buttons}>
           <ArrowPrev className={`${styles.btn}`} />
-          {!playing ? (
-            <Play className={`${styles.btn}`} onClick={() => handleTrackClick(myAudio)} />
-          ) : (
-            <Pause className={`${styles.btn}`} onClick={() => handlePauseClick()} />
-          )}
+          <PlayBtn style={styles.btn} playing={playing} onClick={handleTrackClick} />
           <ArrowNext className={`${styles.btn}`} />
         </div>
 

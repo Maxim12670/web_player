@@ -1,0 +1,60 @@
+@use "@shared/assets/styles/variables" as variables;
+@use "@shared/assets/styles/mixins" as mixins;
+
+.track {
+  display: flex;
+  width: 100%;
+  height: 4.5rem;
+  padding: .3rem 1rem;
+  border-radius: .5rem;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: variables.$c-gray-dark;
+
+  &:hover {
+    background-color: variables.$c-gray-opacity;
+    transition: all 0.3s ease-in-out;
+    border: .1rem solid variables.$c-blue-light;
+  }
+
+  &__play-btn {
+    @include mixins.reaction-icons;
+    width: 2.5rem;
+  }
+
+  &__avatar {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 1.25rem;
+    border-radius: 0.5rem;
+    object-fit: fill;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 1rem;
+    color: variables.$c-white;
+  }
+
+  &__name {
+    font-size: 1.6rem;
+    letter-spacing: .09rem;
+  }
+
+  &__author {
+    font-size: 1.2rem;
+    letter-spacing: .07rem;
+  }
+
+  &__btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: max-content;
+    overflow: hidden;
+    margin-left: auto;
+  }
+}

@@ -1,13 +1,22 @@
 import { createBrowserRouter, redirect, replace } from "react-router-dom";
-import { MainPage, LoginPage, HomePage, SettingPage, AddNewTrackPage, CreateNewPlaylistPage } from "@pages/index";
+import {
+  MainPage,
+  LoginPage,
+  HomePage,
+  SettingPage,
+  AddNewTrackPage,
+  CreateNewPlaylistPage,
+  AllTracksPage,
+} from "@pages/index";
 import { useAppSelector } from "@app/store/hooks";
-
+import { getAllTracks } from "@entities/track/api/trackApi";
 
 export class RoutePaths {
   static auth = "/auth";
   static main = "/";
   static homePage = "home";
   static addNewTrack = "add-new-track";
+  static allTrack = "all-tracks";
   static settingPage = "setting";
   static createNewPlaylist = "create-new-playlist";
 }
@@ -22,14 +31,23 @@ const homePage = {
   element: <HomePage />,
 };
 
-const addNewTrack = {
+const addNewTrackPage = {
   path: RoutePaths.addNewTrack,
   element: <AddNewTrackPage />,
 };
 
-const createNewPlaylist = {
+const createNewPlaylistPage = {
   path: RoutePaths.createNewPlaylist,
   element: <CreateNewPlaylistPage />,
+};
+
+const allTracksPage = {
+  path: RoutePaths.allTrack,
+  element: <AllTracksPage />,
+  loader: async () => {
+    const tracks = await getAllTracks();
+    return tracks;
+  },
 };
 
 const settingPage = {
@@ -53,9 +71,10 @@ const mainPage = {
   children: [
     { path: "", loader: () => redirect(RoutePaths.homePage) },
     homePage,
-    addNewTrack,
+    addNewTrackPage,
+    createNewPlaylistPage,
     settingPage,
-    createNewPlaylist,
+    allTracksPage,
   ],
 };
 

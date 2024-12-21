@@ -33,8 +33,8 @@ export class FavoriteTrackService {
       favoriteTracks.map(async (favoriteTrack: any) => {
         const track = await TrackRepository.getTrackById(favoriteTrack.track_id);
         return {
-          ...favoriteTrack,
-          track,
+          // ...favoriteTrack,
+          ...track,
         };
       })
     );

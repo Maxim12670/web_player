@@ -78,11 +78,19 @@ export class TrackController {
     }
   }
 
+  static async getAllTracks(req: Request, res: Response) {
+    try {
+      const tracks = await TrackService.getAllTracks();
+      if (tracks) res.status(200).json(tracks);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
   static async getTrackById(req: Request, res: Response) {
     try {
       const { id } = req.query;
       const track = await TrackService.getTrackById(Number(id));
-      console.log(track);
       if (track) res.status(200).json(track);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -92,9 +100,8 @@ export class TrackController {
   static async getTrackByString(req: Request, res: Response) {
     try {
       const { stringSearch } = req.query;
-      const tracks = await TrackService.getTrackByString(String(stringSearch))
-      console.log('tracks', tracks);
-      if(tracks) res.status(200).json(tracks)
+      const tracks = await TrackService.getTrackByString(String(stringSearch));
+      if (tracks) res.status(200).json(tracks);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }

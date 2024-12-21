@@ -6,13 +6,14 @@ interface IMyInput {
   type: MyInputType;
   title?: string;
   placeholder?: string;
-  value?: any; 
+  value?: any;
   style?: string;
   required?: boolean;
+  onKeyPress?: (e: any) => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const MyInput = ({ type, title, placeholder, style, required, value, onChange }: IMyInput) => {
+const MyInput = ({ type, title, placeholder, style, required, value, onKeyPress, onChange }: IMyInput) => {
   return (
     <div className={`${styles["my-input"]} ${style}`}>
       <span className={styles["my-input__title"]}>{title}</span>
@@ -23,6 +24,7 @@ const MyInput = ({ type, title, placeholder, style, required, value, onChange }:
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onKeyPress={onKeyPress}
       />
     </div>
   );

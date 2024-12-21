@@ -9,8 +9,17 @@ export class TrackService {
     }
   }
 
+  static async getAllTracks() {
+    const tracks = await TrackRepository.getAllTracks();
+
+    if (!tracks) throw new Error("Что-то пошло не так...");
+
+    return tracks;
+  }
+
   static async getTrackById(id: number) {
     const track = await TrackRepository.getTrackById(id);
+    
     if (!track) throw new Error("Такого трека нет!");
 
     return track;
