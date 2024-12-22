@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppSelector } from "@app/store/hooks";
 import { addTrackFavorite, deleteTrackFavorite } from "@entities/track/api/trackApi";
 
-export const useTrackToFavorite = () => {
+const useTrackToFavorite = () => {
   const [error, setError] = useState<string | null>(null);
   const user = useAppSelector((state) => state.user);
 
@@ -22,3 +22,5 @@ export const useTrackToFavorite = () => {
 
   return { handleClickTrackToFavorite, error };
 };
+
+export default useTrackToFavorite;

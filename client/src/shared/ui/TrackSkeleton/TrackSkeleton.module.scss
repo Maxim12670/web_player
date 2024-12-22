@@ -1,5 +1,4 @@
 @use "@shared/assets/styles/variables" as variables;
-@use "@shared/assets/styles/mixins" as mixins;
 
 .track {
   display: flex;
@@ -17,18 +16,10 @@
     border: .1rem solid variables.$c-blue-light;
   }
 
-  &__play-btn {
-    @include mixins.reaction-icons;
-    width: 2.5rem;
-  }
-
   &__avatar {
-    display: block;
     width: 4rem;
     height: 4rem;
     margin-left: 1.25rem;
-    border-radius: 0.5rem;
-    object-fit: fill;
   }
 
   &__container {

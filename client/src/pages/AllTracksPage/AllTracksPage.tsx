@@ -1,7 +1,7 @@
 import styles from "./AllTracksPage.module.scss";
 import { MyInput } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
-import TrackItem from "./ui/TrackItem";
+import {TrackItem} from "@widgets/ui";
 import { useLoaderData } from "react-router-dom";
 import { ITrack } from "@entities/track/model/track";
 import { useEffect, useState } from "react";

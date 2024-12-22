@@ -6,5 +6,7 @@ import MySelect from "./MySelect/MySelect";
 import FileBtn from "./FileBtn/FileBtn";
 import PlayBtn from "./PlayBtn/PlayBtn";
 import TrackSkeleton from "./TrackSkeleton/TrackSkeleton";
+import Avatar from "./Avatar/Avatar";
+import FavoriteBtn from "./FavoriteBtn/FavoriteBtn";
 
-export { ContentContainer, MyInput, MyButton, UseSvg, MySelect, FileBtn, PlayBtn, TrackSkeleton };
+export { ContentContainer, MyInput, MyButton, UseSvg, MySelect, FileBtn, PlayBtn, TrackSkeleton, Avatar, FavoriteBtn };
