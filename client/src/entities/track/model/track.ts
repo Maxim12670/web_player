@@ -1,13 +1,3 @@
-// export enum Genres {
-//   "Rock",
-//   "Hip-Hop",
-//   "Chanson",
-//   "Jazz",
-//   "Drill",
-//   "Pop",
-//   "Rap",
-// }
-
 export const trackGenres = ["Not genre", "Rock", "Hip-Hop", "Chanson", "Jazz", "Drill", "Pop", "Rap"];
 
 export interface ITrack {
@@ -18,4 +8,5 @@ export interface ITrack {
   duration?: string;
   logo_path: string | null;
   track_path: string;
+  isActive?: boolean;
 }

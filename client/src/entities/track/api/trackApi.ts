@@ -5,7 +5,7 @@ import { ITrack } from "../model/track";
 class ApiTrack {
   static postNewTrack = "track/new-track";
   static getAll = "track/all-tracks";
-  static getByString = "track/get-tracks-by-string";
+  static generalSearch = "track/get-tracks-by-string";
   static addTrackFavorite = "favorite-track/add";
   static deleteTrackFavorite = "favorite-track/delete";
 }
@@ -26,7 +26,7 @@ export const getAllTracks = async () => {
 
 export const getTracksByString = async (stringSearch: string): Promise<ITrack[]> => {
   try {
-    const response = await axiosInstance.get(ApiTrack.getByString, {
+    const response = await axiosInstance.get(ApiTrack.generalSearch, {
       params: {
         stringSearch: stringSearch,
       },
@@ -38,6 +38,9 @@ export const getTracksByString = async (stringSearch: string): Promise<ITrack[]>
     return [];
   }
 };
+
+// getFavoriteTracks
+// getFavoriteTracksByString
 
 export const addTrackFavorite = async (personId: number, trackId: number) => {
   const response = await axiosInstance.post(ApiTrack.addTrackFavorite, {

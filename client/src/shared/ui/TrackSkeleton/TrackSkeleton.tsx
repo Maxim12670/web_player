@@ -18,7 +18,7 @@ const TrackSkeleton = ({ children, style, track }: ITrackSkeleton) => {
       <Avatar style={styles["track__avatar"]} avatar_path={track.logo_path} />
       <div className={styles["track__container"]}>
         <span className={styles["track__name"]}>{track.name}</span>
-        <span className={styles["track__author"]}>{track.author}</span>
+        <span className={styles["track__author"]}>{track.author != "null" ? track.author : ""}</span>
       </div>
       <div className={styles["track__btns"]}>{childrenArray[1]}</div>
     </div>
