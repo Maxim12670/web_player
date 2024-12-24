@@ -34,4 +34,15 @@ export class FavoriteTrackController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  static async getTrackByString(req: Request, res: Response) {
+    try {
+      const { personId, searchString } = req.body;
+      const result = await FavoriteTrackService.getTrackByString(personId, searchString);
+      if (result) res.status(200).json(result);
+    } catch (error: any) {
+      console.log("Error in getTrackByString: ", error);
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

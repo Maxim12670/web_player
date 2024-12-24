@@ -4,7 +4,14 @@ const fileUpload = require("express-fileupload");
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import { authRouter, userRouter, trackRouter, playlistRouter, playlistTrackRouter, favoriteTrackRouter } from "./src/routes/index";
+import {
+  authRouter,
+  userRouter,
+  trackRouter,
+  playlistRouter,
+  playlistTrackRouter,
+  favoriteTrackRouter,
+} from "./src/routes/index";
 
 dotenv.config();
 
@@ -19,7 +26,7 @@ app.use("/api/user", userRouter);
 app.use("/api/track", trackRouter);
 app.use("/api/playlist", playlistRouter);
 app.use("/api/playlist-track", playlistTrackRouter);
-app.use('/api/favorite-track', favoriteTrackRouter)
+app.use("/api/favorite-track", favoriteTrackRouter);
 
 const port = 3001;
 

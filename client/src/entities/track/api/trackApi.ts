@@ -4,10 +4,12 @@ import { ITrack } from "../model/track";
 
 class ApiTrack {
   static postNewTrack = "track/new-track";
-  static getAll = "track/all-tracks";
-  static generalSearch = "track/get-tracks-by-string";
-  static addTrackFavorite = "favorite-track/add";
-  static deleteTrackFavorite = "favorite-track/delete";
+  static getAllTracks = "track/all-tracks";
+  static generalSearch = "track/get-by-string";
+  static getAllFavoriteTracks = "favorite-track/all-track";
+  static getFavoriteTracksByString = "favorite-track/get-by-string";
+  static addFavoriteTrack = "favorite-track/add";
+  static deleteFavoriteTrack = "favorite-track/delete";
 }
 
 export const postNewTrack = async (formData: FormData): Promise<void> => {
@@ -19,16 +21,16 @@ export const postNewTrack = async (formData: FormData): Promise<void> => {
 };
 
 export const getAllTracks = async () => {
-  const tracks = await axiosInstance.get(ApiTrack.getAll);
+  const tracks = await axiosInstance.get(ApiTrack.getAllTracks);
 
   return tracks.data as ITrack[];
 };
 
-export const getTracksByString = async (stringSearch: string): Promise<ITrack[]> => {
+export const getTracksByString = async (searchString: string): Promise<ITrack[]> => {
   try {
     const response = await axiosInstance.get(ApiTrack.generalSearch, {
       params: {
-        stringSearch: stringSearch,
+        searchString,
       },
     });
 
@@ -41,9 +43,25 @@ export const getTracksByString = async (stringSearch: string): Promise<ITrack[]>
 
 // getFavoriteTracks
 // getFavoriteTracksByString
+export const getFavoriteTracks = async (personId: number) => {
+  const response = await axiosInstance.post(ApiTrack.getAllFavoriteTracks, {
+    personId,
+  });
+
+  return response.data as ITrack[];
+};
+
+export const getFavoriteTracksByString = async (personId: number, searchString: string) => {
+  const response = await axiosInstance.post(ApiTrack.getFavoriteTracksByString, {
+    personId,
+    searchString,
+  });
+
+  return response.data as ITrack[];
+};
 
 export const addTrackFavorite = async (personId: number, trackId: number) => {
-  const response = await axiosInstance.post(ApiTrack.addTrackFavorite, {
+  const response = await axiosInstance.post(ApiTrack.addFavoriteTrack, {
     personId,
     trackId,
   });
@@ -52,7 +70,7 @@ export const addTrackFavorite = async (personId: number, trackId: number) => {
 };
 
 export const deleteTrackFavorite = async (personId: number, trackId: number) => {
-  const response = await axiosInstance.post(ApiTrack.deleteTrackFavorite, {
+  const response = await axiosInstance.post(ApiTrack.deleteFavoriteTrack, {
     personId,
     trackId,
   });

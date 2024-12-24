@@ -99,8 +99,8 @@ export class TrackController {
 
   static async getTrackByString(req: Request, res: Response) {
     try {
-      const { stringSearch } = req.query;
-      const tracks = await TrackService.getTrackByString(String(stringSearch));
+      const { searchString } = req.query;
+      const tracks = await TrackService.getTrackByString(String(searchString));
       if (tracks) res.status(200).json(tracks);
     } catch (error: any) {
       res.status(400).json({ message: error.message });

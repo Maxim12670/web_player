@@ -19,20 +19,20 @@ export class TrackRepository {
     return result;
   }
 
-  static async getAllTracks() {
-    const tracks = await pool.query("SELECT * FROM track");
-    return tracks.rows.length > 0 ? tracks.rows : null;
+  static async getAllTracks(): Promise<ITrack[] | null> {
+    const result = await pool.query("SELECT * FROM track");
+    return result.rows.length > 0 ? result.rows : null;
   }
 
   static async getTrackById(id: number): Promise<ITrack | null> {
-    const track = await pool.query("SELECT * FROM track WHERE track_id = $1", [id]);
-    return track.rows[0] ?? null;
+    const result = await pool.query("SELECT * FROM track WHERE track_id = $1", [id]);
+    return result.rows[0] ?? null;
   }
 
-  static async getTrackByString(stringSearch: string): Promise<ITrack[] | null> {
-    const tracks = await pool.query("SELECT * FROM track WHERE name ILIKE $1 OR author ILIKE $1", [
-      `%${stringSearch}%`,
+  static async getTrackByString(searchString: string): Promise<ITrack[] | null> {
+    const result = await pool.query("SELECT * FROM track WHERE name ILIKE $1 OR author ILIKE $1", [
+      `%${searchString}%`,
     ]);
-    return tracks.rows.length > 0 ? tracks.rows : null;
+    return result.rows.length > 0 ? result.rows : null;
   }
 }
