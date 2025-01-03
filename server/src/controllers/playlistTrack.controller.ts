@@ -1,6 +1,7 @@
 import { PlaylistTrackService } from "../services/playlistTrack.service";
 import IPlaylistTrack from "../models/playlistTrack.model";
 import { Request, Response } from "express";
+import ITrack from "../models/track.model";
 
 export class PlaylistTrackController {
   static async addTrackPlaylist(req: Request, res: Response) {
@@ -30,7 +31,7 @@ export class PlaylistTrackController {
   static async getAllTrackPlaylist(req: Request, res: Response) {
     try {
       const { playlistId } = req.body;
-      const result: IPlaylistTrack[] = await PlaylistTrackService.getAllTrackPlaylist(playlistId);
+      const result: ITrack[] = await PlaylistTrackService.getAllTrackPlaylist(playlistId);
 
       if (result) res.status(200).json(result);
     } catch (error: any) {

@@ -69,12 +69,12 @@ const AddNewTrack = () => {
   };
 
   useEffect(() => {
-    if (trackName != "" && author != "" && track != null) {
+    if (trackName !== null && track !== null) {
       setIsDisableBtn(false);
     } else {
       setIsDisableBtn(true);
     }
-  }, [trackName, author, genre, avatar, track]);
+  }, [trackName, track]);
 
   return (
     <div className={styles.wrapper}>
@@ -115,7 +115,8 @@ const AddNewTrack = () => {
         {previewPath && <img src={previewPath} alt="Preview" className={styles.avatar} />}
         <MyButton
           text="Post Data"
-          style={`${styles.btn} ${styles["btn_post"]} ${isDisableBtn ? styles["btn_disable"] : ""}`}
+          style={`${styles.btn} ${styles["btn_post"]}`}
+          disabled={isDisableBtn}
           onClick={handleSubmit}
         />
       </div>

@@ -21,14 +21,14 @@ export class PlaylistService {
     return result;
   }
 
-  static async getUserSelectPlaylist(personId: number, playlistId: number) {
+  static async getCurrentPlaylist(personId: number, playlistId: number) {
     const user = await UserRepository.getInfo(personId);
     const playlist = await PlaylistRepository.findPlaylist(playlistId);
 
     if (!user) throw new Error("Пользователь не существует!");
     if (!playlist) throw new Error("Плейлист не найден!");
 
-    const result = await PlaylistRepository.getUserSelectPlaylist(personId, playlistId);
+    const result = await PlaylistRepository.getCurrentPlaylist(personId, playlistId);
 
     if (!result) throw new Error("Что-то пошло не так...");
 

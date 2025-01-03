@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect, replace } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import {
   MainPage,
   LoginPage,
@@ -7,9 +7,11 @@ import {
   AddNewTrackPage,
   CreateNewPlaylistPage,
   AllTracksPage,
+  FavoriteTracksPage,
+  PlaylistPage,
 } from "@pages/index";
 import { useAppSelector } from "@app/store/hooks";
-import { getAllTracks } from "@entities/track/api/trackApi";
+import { getAllTracks, requestAllFavoritesTracks } from "@entities/track/api/trackApi";
 
 export class RoutePaths {
   static auth = "/auth";
@@ -17,8 +19,10 @@ export class RoutePaths {
   static homePage = "home";
   static addNewTrack = "add-new-track";
   static allTrack = "all-tracks";
+  static favoritesTracks = "favorites-tracks";
   static settingPage = "setting";
   static createNewPlaylist = "create-new-playlist";
+  static playlistPage = "playlist/:playlistId";
 }
 
 const loginPage = {
@@ -50,6 +54,23 @@ const allTracksPage = {
   },
 };
 
+const favoriteTracksPage = {
+  path: RoutePaths.favoritesTracks,
+  element: <FavoriteTracksPage />,
+  loader: async () => {
+    if (localStorage.getItem("id")) {
+      const tracks = await requestAllFavoritesTracks(Number(localStorage.getItem("id")));
+      return tracks;
+    }
+    return [];
+  },
+};
+
+const playlistPage = {
+  path: RoutePaths.playlistPage,
+  element: <PlaylistPage />
+};
+
 const settingPage = {
   path: RoutePaths.settingPage,
   element: <SettingPage />,
@@ -57,8 +78,7 @@ const settingPage = {
 
 const MainPageWrapper = () => {
   const user = useAppSelector((state) => state.user);
-
-  if (!user.person_id && !localStorage.getItem("id")) {
+  if (user.person_id == 0 && !localStorage.getItem("id")) {
     return <LoginPage />;
   }
 
@@ -75,6 +95,8 @@ const mainPage = {
     createNewPlaylistPage,
     settingPage,
     allTracksPage,
+    favoriteTracksPage,
+    playlistPage,
   ],
 };
 

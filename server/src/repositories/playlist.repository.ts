@@ -35,7 +35,7 @@ export class PlaylistRepository {
     return result;
   }
 
-  static async getUserSelectPlaylist(personId: number, playlistId: number) {
+  static async getCurrentPlaylist(personId: number, playlistId: number) {
     const playlist = await pool.query("SELECT * FROM playlist WHERE person_id = $1 AND playlist_id = $2", [
       personId,
       playlistId,

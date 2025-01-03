@@ -2,6 +2,7 @@ import IPlaylistTrack from "../models/playlistTrack.model";
 import { PlaylistTrackRepository } from "../repositories/playlistTrack.repository";
 import { TrackRepository } from "../repositories/track.repository";
 import { PlaylistRepository } from "../repositories/playlist.repository";
+import ITrack from "../models/track.model";
 
 export class PlaylistTrackService {
   static async addTrackPlaylist(playlistId: number, trackId: number) {
@@ -43,12 +44,11 @@ export class PlaylistTrackService {
       playlistTracks.map(async (playlistTrack: any) => {
         const track = await TrackRepository.getTrackById(playlistTrack.track_id);
         return {
-          ...playlistTrack,
-          track,
+          ...track,
         };
       })
     );
 
-    return tracks;
+    return tracks as ITrack[];
   }
 }

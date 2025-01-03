@@ -15,8 +15,8 @@ const MainPage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user.person_id && localStorage.getItem("id")) {
-        const data: IUser = await getUserInfo(Number(localStorage.getItem("id")));
-        dispatch(setInfo(data));
+        const data = await getUserInfo(Number(localStorage.getItem("id")));
+        if (data) dispatch(setInfo(data as IUser));
       }
     };
 

@@ -5,5 +5,17 @@ import SettingPage from "./SettingPage/SettingPage";
 import AddNewTrackPage from "./AddNewTrackPage/AddNewTrackPage";
 import CreateNewPlaylistPage from "./CreateNewPlaylistPage/CreateNewPlaylistPage";
 import AllTracksPage from "./AllTracksPage/AllTracksPage";
+import FavoriteTracksPage from "./FavoriteTracksPage/FavoriteTracksPage";
+import PlaylistPage from "./PlaylistPage/PlaylistPage";
 
-export { LoginPage, MainPage, HomePage, SettingPage, AddNewTrackPage, CreateNewPlaylistPage, AllTracksPage };
+export {
+  LoginPage,
+  MainPage,
+  HomePage,
+  SettingPage,
+  AddNewTrackPage,
+  CreateNewPlaylistPage,
+  AllTracksPage,
+  FavoriteTracksPage,
+  PlaylistPage,
+};

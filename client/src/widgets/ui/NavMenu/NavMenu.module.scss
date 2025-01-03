@@ -57,6 +57,7 @@
     list-style-type: none;
     color: #fff;
     font-size: 1.6rem;
+    text-decoration: none;
     cursor: pointer;
 
     &_small {
@@ -64,6 +65,10 @@
     }
 
     &:hover {
+      color: variables.$c-blue-light;
+    }
+
+    &_active {
       color: variables.$c-blue-light;
     }
   }

@@ -36,7 +36,7 @@ const LoginForm = () => {
                 style={styles.input}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
             />
-            {error ? <p>{error}</p> : ""}
+            {error ? <p className={styles['login-form__error']}>{error}</p> : ""}
             <MyButton text="Sing in" style={styles.button} disabled={disabledBtn} onClick={onSubmit} />
         </div>
     );

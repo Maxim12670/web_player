@@ -96,7 +96,7 @@ const AudioPlayer = () => {
   return (
     <div className={styles.player}>
       <div className={styles.track}>
-        <Avatar style={styles.track__avatar} avatar_path={currentTrack.logo_path} />
+        <Avatar style={styles.track__avatar} avatarPath={currentTrack.logo_path} />
         <div className={styles.track__wrapper}>
           <h2 className={styles.track__title}>{currentTrack.name}</h2>
           <h3 className={styles.track__subtitle}>{currentTrack.author != "null" ? currentTrack.author : ""}</h3>

@@ -9,4 +9,5 @@ export interface ITrack {
   logo_path: string | null;
   track_path: string;
   isActive?: boolean;
+  isFavorite?: boolean;
 }

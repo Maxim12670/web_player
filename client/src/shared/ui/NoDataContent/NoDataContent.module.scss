@@ -1,0 +1,13 @@
+@use "@shared/assets/styles/variables";
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: variables.$c-white;
+  }
+}

@@ -3,7 +3,7 @@ import { TrackSkeleton, FavoriteBtn, PlayBtn } from "@shared/ui";
 import { Ellipsis } from "@shared/assets/icons";
 import { useEffect, useState } from "react";
 import { ITrack } from "@entities/track/model/track";
-import { useTrackToFavorite, useStartTrack } from "@features/track/model";
+import { useFavoriteTrack, useStartTrack } from "@features/track/model";
 import { useAppSelector } from "@app/store/hooks";
 
 interface ITrackItem {
@@ -15,7 +15,7 @@ const TrackItem = ({ style, track }: ITrackItem) => {
   const [addedTrack, setAddTrack] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
   const currentTrack = useAppSelector((state) => state.currentTrack);
-  const { handleClickTrackToFavorite } = useTrackToFavorite();
+  const { handleClickTrackToFavorite } = useFavoriteTrack();
   const { handleTogglePlay } = useStartTrack();
 
   const handleClickPlay = () => {
@@ -26,6 +26,12 @@ const TrackItem = ({ style, track }: ITrackItem) => {
     setAddTrack(!addedTrack);
     handleClickTrackToFavorite(track.track_id!, addedTrack);
   };
+
+  useEffect(() => {
+    if (track.isFavorite != undefined) {
+      setAddTrack(track.isFavorite);
+    }
+  }, []);
 
   useEffect(() => {
     if (track.track_id === currentTrack.track_id) {

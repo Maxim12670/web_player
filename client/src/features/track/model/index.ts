@@ -1,4 +1,4 @@
-import useTrackToFavorite from "./useTrackToFavorite";
+import useFavoriteTrack from "./useFavoriteTrack";
 import useStartTrack from "./useStartTrack";
 
-export { useTrackToFavorite, useStartTrack };
+export { useFavoriteTrack, useStartTrack };

@@ -3,13 +3,13 @@ import noPhoto from "@shared/assets/image/no-photo.png";
 
 interface IAvatar {
   style?: string;
-  avatar_path: string | null;
+  avatarPath: string | null;
 }
 
-const Avatar = ({ style, avatar_path }: IAvatar) => {
+const Avatar = ({ style, avatarPath }: IAvatar) => {
   return (
     <img
-      src={avatar_path ? `http://localhost:3001${avatar_path}` : noPhoto}
+      src={avatarPath ? `http://localhost:3001${avatarPath}` : noPhoto}
       alt="avatar"
       className={`${styles["avatar"]} ${style}`}
     />

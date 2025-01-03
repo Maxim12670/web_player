@@ -1,4 +1,3 @@
-// методы отправки, получения и тд
 import axiosInstance from "@shared/api/axiosInstace";
 import { ITrack } from "../model/track";
 
@@ -6,8 +5,8 @@ class ApiTrack {
   static postNewTrack = "track/new-track";
   static getAllTracks = "track/all-tracks";
   static generalSearch = "track/get-by-string";
-  static getAllFavoriteTracks = "favorite-track/all-track";
-  static getFavoriteTracksByString = "favorite-track/get-by-string";
+  static getAllFavoritesTracks = "favorite-track/all-track";
+  static getFavoritesTracksByString = "favorite-track/get-by-string";
   static addFavoriteTrack = "favorite-track/add";
   static deleteFavoriteTrack = "favorite-track/delete";
 }
@@ -41,18 +40,16 @@ export const getTracksByString = async (searchString: string): Promise<ITrack[]>
   }
 };
 
-// getFavoriteTracks
-// getFavoriteTracksByString
-export const getFavoriteTracks = async (personId: number) => {
-  const response = await axiosInstance.post(ApiTrack.getAllFavoriteTracks, {
+export const requestAllFavoritesTracks = async (personId: number) => {
+  const response = await axiosInstance.post(ApiTrack.getAllFavoritesTracks, {
     personId,
   });
 
   return response.data as ITrack[];
 };
 
-export const getFavoriteTracksByString = async (personId: number, searchString: string) => {
-  const response = await axiosInstance.post(ApiTrack.getFavoriteTracksByString, {
+export const requestFavoritesTracksByString = async (personId: number, searchString: string) => {
+  const response = await axiosInstance.post(ApiTrack.getFavoritesTracksByString, {
     personId,
     searchString,
   });

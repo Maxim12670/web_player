@@ -69,11 +69,11 @@ export class PlaylistController {
     }
   }
 
-  static async getUserSelectPlaylist(req: Request, res: Response) {
+  static async getCurrentPlaylist(req: Request, res: Response) {
     try {
       const { personId, playlistId } = req.body;
 
-      const result = await PlaylistService.getUserSelectPlaylist(personId, playlistId);
+      const result = await PlaylistService.getCurrentPlaylist(personId, playlistId);
       if (result) res.status(200).json(result);
     } catch (error: any) {
       console.log("Error in getUserSelectPlaylist", error.message);

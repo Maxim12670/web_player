@@ -2,14 +2,15 @@ import styles from "./CreateNewPlaylistPage.module.scss";
 import { MyButton, MyInput, FileBtn } from "@shared/ui";
 import { MyInputType } from "@shared/types/enums";
 import { useState, ChangeEvent, useEffect } from "react";
+import { usePlaylist } from "@features/playlist/model/usePlaylist";
 
 const CreateNewPlaylist = () => {
-  // title, descr, logo, person_id
   const [isDisableBtn, setIsDisableBtn] = useState<boolean>(true);
   const [previewPath, setPreviewPath] = useState<string | null>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<File | null>(null);
+  const { handlePostPlaylist } = usePlaylist();
 
   const clearFormData = () => {
     setPreviewPath(null);
@@ -33,19 +34,24 @@ const CreateNewPlaylist = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("title", title!);
-    formData.append("descr", description ?? "");
+    formData.append("description", description ?? "");
     formData.append("logo_path", avatar ?? "");
-    // formData.append("person_id", id!);
 
-    formData.forEach((value, key) => {
-      console.log(`${key}:`, value);
-    });
+    await handlePostPlaylist(formData);
 
     clearFormData();
   };
+
+  useEffect(() => {
+    if (title !== "") {
+      setIsDisableBtn(false);
+    } else {
+      setIsDisableBtn(true);
+    }
+  }, [title, handleChangeTitle]);
 
   return (
     <div className={styles["create-playlist"]}>
@@ -76,7 +82,8 @@ const CreateNewPlaylist = () => {
         <MyButton text="Select tracks" style={`${styles.btn} ${styles["btn__select"]}`} />
         <MyButton
           text="Post Data"
-          style={`${styles.btn} ${styles["btn__post"]} ${isDisableBtn ? styles["btn_disable"] : ""}`}
+          disabled={isDisableBtn}
+          style={`${styles.btn} ${styles["btn__post"]}`}
           onClick={handleSubmit}
         />
       </div>

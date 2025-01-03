@@ -1,0 +1,30 @@
+@use '@shared/assets/styles/variables.scss';
+
+.playlist {
+
+  padding: 2rem 1.5rem;
+
+  &__container {
+    display: flex;
+
+  }
+
+  &__avatar {
+    width: 10rem;
+  }
+
+
+  &__descr {
+    margin-left: 1.25rem;
+    font-size: 1.6rem;
+    color: variables.$c-white;
+  }
+
+
+  &__tracks {}
+}
+
+.track {
+  margin-top: .5rem;
+
+}
