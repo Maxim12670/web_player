@@ -48,5 +48,16 @@ export const requestSelectedPlaylist = async (personId: number, playlistId: numb
 };
 
 // добавить трек в плейлист
-
+export const requestAddTrackPlaylist = async (playlistId: number, trackId: number) => {
+  await axiosInstance.post(ApiPaths.addTrackPlaylist, {
+    playlistId,
+    trackId,
+  });
+};
 // удалить трек с плейлиста
+export const requestDeleteTrackPlaylist = async (playlistId: number, trackId: number) => {
+  await axiosInstance.post(ApiPaths.deleteTrackPlaylist, {
+    playlistId,
+    trackId,
+  });
+};

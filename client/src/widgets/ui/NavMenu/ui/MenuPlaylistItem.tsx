@@ -19,7 +19,6 @@ export const MenuPlaylistItem = ({ playlists }: IMenuPlaylistItem) => {
   const handleClick = (path: string) => {
     navigate(path);
     dispatch(setActiveItem(path));
-    console.log(path, activePathMenu);
   };
 
   return (

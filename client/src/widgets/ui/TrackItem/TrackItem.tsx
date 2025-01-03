@@ -1,17 +1,18 @@
 import styles from "./TrackItem.module.scss";
-import { TrackSkeleton, FavoriteBtn, PlayBtn } from "@shared/ui";
-import { Ellipsis } from "@shared/assets/icons";
+import { TrackSkeleton, FavoriteBtn, PlayBtn, PlaylistBtn } from "@shared/ui";
 import { useEffect, useState } from "react";
 import { ITrack } from "@entities/track/model/track";
 import { useFavoriteTrack, useStartTrack } from "@features/track/model";
 import { useAppSelector } from "@app/store/hooks";
+import { IPlaylist } from "@entities/playlist/model/playlist";
 
 interface ITrackItem {
   style: string;
   track: ITrack;
+  playlists: IPlaylist[];
 }
 
-const TrackItem = ({ style, track }: ITrackItem) => {
+const TrackItem = ({ style, track, playlists }: ITrackItem) => {
   const [addedTrack, setAddTrack] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
   const currentTrack = useAppSelector((state) => state.currentTrack);
@@ -46,7 +47,7 @@ const TrackItem = ({ style, track }: ITrackItem) => {
       <PlayBtn playing={playing} onClick={handleClickPlay} style={styles["btn__play"]} />
       <>
         <FavoriteBtn style={styles.btn} handleClick={handleClickFavorite} addedTrack={addedTrack} />
-        <Ellipsis className={styles.btn} />
+        <PlaylistBtn style={styles.btn} playlists={playlists} track={track}/>
       </>
     </TrackSkeleton>
   );

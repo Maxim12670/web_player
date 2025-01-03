@@ -27,9 +27,7 @@ export const currentTrackSlice = createSlice({
       state.isActive = true;
     },
     toggleStart: (state) => {
-      
       state.isActive = !state.isActive;
-      console.log("togglestart", state.isActive)
     },
   },
 });

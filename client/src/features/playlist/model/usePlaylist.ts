@@ -4,6 +4,8 @@ import {
   requestAllPlaylist,
   requestTracksPlaylist,
   requestSelectedPlaylist,
+  requestAddTrackPlaylist,
+  requestDeleteTrackPlaylist,
 } from "@entities/playlist/api/playlistApi";
 import { IPlaylist } from "@entities/playlist/model/playlist";
 import { ITrack } from "@entities/track/model/track";
@@ -27,7 +29,6 @@ export const usePlaylist = () => {
   const getAllPlaylist = async () => {
     try {
       const result = await requestAllPlaylist(Number(localStorage.getItem("id")));
-      console.log("playlist: ", result);
       return result as IPlaylist[];
     } catch (err: any) {
       if (err instanceof Error) setError(err.message);
@@ -51,5 +52,29 @@ export const usePlaylist = () => {
       if (err instanceof Error) setError(err.message);
     }
   };
-  return { error, handlePostPlaylist, getAllPlaylist, getTracksPlaylist, getSelectedPlaylist };
+
+  const addTrackPlaylist = async (playlistId: number, trackId: number) => {
+    try {
+      await requestAddTrackPlaylist(playlistId, trackId);
+    } catch (err: any) {
+      if (err instanceof Error) setError(err.message);
+    }
+  };
+
+  const deleteTrackPlaylist = async (playlistId: number, trackId: number) => {
+    try {
+      await requestDeleteTrackPlaylist(playlistId, trackId);
+    } catch (err: any) {
+      if (err instanceof Error) setError(err.message);
+    }
+  };
+  return {
+    error,
+    handlePostPlaylist,
+    getAllPlaylist,
+    getTracksPlaylist,
+    getSelectedPlaylist,
+    addTrackPlaylist,
+    deleteTrackPlaylist,
+  };
 };

@@ -6,12 +6,16 @@ import { useLoaderData } from "react-router-dom";
 import { ITrack } from "@entities/track/model/track";
 import { useEffect, useState } from "react";
 import { useFavoriteTrack } from "@features/track/model";
+import { usePlaylist } from "@features/playlist/model/usePlaylist";
+import { IPlaylist } from "@entities/playlist/model/playlist";
 
 const FavoriteTracksPage = () => {
   const loaderData = useLoaderData() as ITrack[];
   const [tracks, setTracks] = useState<ITrack[]>([]);
+  const [playlists, setPlaylists] = useState<IPlaylist[]>([]);
   const [searchString, setSearchString] = useState<string | null>(null);
   const { getFavoritesTracksByString } = useFavoriteTrack();
+  const { getAllPlaylist } = usePlaylist();
 
   const handleKeyPress = async (e: any) => {
     if (e.key === "Enter") {
@@ -25,6 +29,15 @@ const FavoriteTracksPage = () => {
   };
 
   useEffect(() => {
+    const fetchPlaylists = async () => {
+      const data = await getAllPlaylist();
+      setPlaylists(data as IPlaylist[]);
+    };
+
+    fetchPlaylists();
+  }, []);
+
+  useEffect(() => {
     if (loaderData) {
       setTracks(loaderData);
     } else setTracks([]);
@@ -36,7 +49,7 @@ const FavoriteTracksPage = () => {
       <div>
         {tracks.length != 0 ? (
           tracks.map((track: ITrack) => (
-            <TrackItem style={styles["tracks__item"]} track={{ ...track, isFavorite: true }} />
+            <TrackItem style={styles["tracks__item"]} track={{ ...track, isFavorite: true }} playlists={playlists} />
           ))
         ) : (
           <NoDataContent title="Нет данных!!!" />

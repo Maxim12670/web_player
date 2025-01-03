@@ -51,7 +51,6 @@ const NavMenu = () => {
     const fetchPlaylists = async () => {
       try {
         const userPlaylist = await getAllPlaylist();
-        console.log("11", userPlaylist);
         if (userPlaylist) {
           setPlaylists(userPlaylist);
         }

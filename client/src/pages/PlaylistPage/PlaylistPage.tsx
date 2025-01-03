@@ -10,17 +10,20 @@ import { IPlaylist } from "@entities/playlist/model/playlist";
 const PlaylistPage = () => {
   const { playlistId } = useParams();
   const [tracks, setTracks] = useState<ITrack[]>([]);
-  const [playlist, setPlaylist] = useState<IPlaylist | null>(null);
+  const [currentPlaylist, setCurrentPlaylist] = useState<IPlaylist | null>(null);
+  const [playlists, setPlaylists] = useState<IPlaylist[]>([]);
 
-  const { getTracksPlaylist, getSelectedPlaylist } = usePlaylist();
+  const { getTracksPlaylist, getSelectedPlaylist, getAllPlaylist } = usePlaylist();
 
   useEffect(() => {
     const fetchTracks = async () => {
       try {
         const fetchTracks = await getTracksPlaylist(Number(playlistId));
-        const fetchPlaylist = await getSelectedPlaylist(Number(playlistId));
+        const fetchcurrentPlaylist = await getSelectedPlaylist(Number(playlistId));
+        const fetchPlaylists = await getAllPlaylist();
         setTracks(fetchTracks as ITrack[]);
-        setPlaylist(fetchPlaylist as IPlaylist);
+        setCurrentPlaylist(fetchcurrentPlaylist as IPlaylist);
+        setPlaylists(fetchPlaylists as IPlaylist[]);
       } catch (err: any) {
         console.log("Error in playlist page: ", err.message);
       }
@@ -32,12 +35,16 @@ const PlaylistPage = () => {
   return (
     <div className={styles.playlist}>
       <div className={styles["playlist__container"]}>
-        <Avatar avatarPath={playlist?.logo_path!} style={styles["playlist__avatar"]} />
-        {playlist?.description && <span className={styles["playlist__descr"]}>{playlist?.description}</span>}
+        <Avatar avatarPath={currentPlaylist?.logo_path!} style={styles["playlist__avatar"]} />
+        {currentPlaylist?.description && (
+          <span className={styles["playlist__descr"]}>{currentPlaylist?.description}</span>
+        )}
       </div>
       <div className={styles["playlist__tracks"]}>
         {tracks.length != 0 ? (
-          tracks.map((track: ITrack) => <TrackItem style={styles["track"]} track={{ ...track }} />)
+          tracks.map((track: ITrack) => (
+            <TrackItem style={styles["track"]} track={{ ...track }} playlists={playlists} />
+          ))
         ) : (
           <NoDataContent title="Плейлист пустой!" />
         )}

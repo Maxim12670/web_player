@@ -1,0 +1,45 @@
+@use "@shared/assets/styles/variables" as variables;
+
+.wrapper {
+  position: relative;
+}
+
+
+.playlist {
+
+  &:hover+.playlist__window {
+    visibility: visible;
+  }
+
+  &__window {
+    visibility: hidden;
+    position: absolute;
+    right: 25rem;
+    width: 10rem;
+    padding: 1rem;
+    height: min-content;
+    border: .01rem solid variables.$c-blue-light;
+    border-radius: .5rem;
+    background-color: variables.$c-black-light;
+
+    &:hover {
+      visibility: visible;
+    }
+  }
+
+  &__item {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: white;
+    list-style-type: none;
+    cursor: pointer;
+
+    &:hover {
+      color: variables.$c-blue-light;
+    }
+
+    &-added {
+      color: variables.$c-green;
+    }
+  }
+}

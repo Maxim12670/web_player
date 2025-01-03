@@ -9,6 +9,7 @@ import TrackSkeleton from "./TrackSkeleton/TrackSkeleton";
 import Avatar from "./Avatar/Avatar";
 import FavoriteBtn from "./FavoriteBtn/FavoriteBtn";
 import NoDataContent from "./NoDataContent/NoDataContent";
+import PlaylistBtn from "./PlaylistBtn/PlaylistBtn";
 
 export {
   ContentContainer,
@@ -22,4 +23,5 @@ export {
   Avatar,
   FavoriteBtn,
   NoDataContent,
+  PlaylistBtn,
 };
